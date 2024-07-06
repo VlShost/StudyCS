@@ -2,11 +2,12 @@
 {
     public class ShapeHandler
     {
-        public static void HandleShape(string ShapeName)
+        public static void HandleShape(string shapeName)
         {
-            IShape shape = null;
+            IArea area = null;
+            IPerimeter perimeter = null;
 
-            switch (ShapeName.ToLower())
+            switch (shapeName.ToLower())
             {
                 case "rectangle":
                     Console.WriteLine("Enter WIDTH of rectangle:");
@@ -15,14 +16,20 @@
                     Console.WriteLine("Enter HEIGHT of rectangle:");
                     int height = int.Parse(Console.ReadLine());
 
-                    shape = new Rectangle(width, height);
+                    Rectangle rectangle = new Rectangle(width, height);
+
+                    area = rectangle;
+                    perimeter = rectangle;
                     break;
 
                 case "square":
                     Console.WriteLine("Enter side length of square:");
                     int side = int.Parse(Console.ReadLine());
 
-                    shape = new Square(side);
+                    Square square = new Square(side);
+
+                    area = square;
+                    perimeter = square;
                     break;
 
                 default:
@@ -30,9 +37,9 @@
                     return;
             }
 
-            if (shape != null)
+            if (area != null && perimeter != null)
             {
-                Console.WriteLine($"\n{shape}: area is {shape.GetArea()} and perimeter is {shape.GetPerimeter()}");
+                Console.WriteLine($"\n{shapeName}: area is {area.GetArea()} and perimeter is {perimeter.GetPerimeter()}");
             }
         }
     }
