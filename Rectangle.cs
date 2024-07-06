@@ -1,6 +1,6 @@
 ﻿namespace shapes
 {
-    internal class Rectangle
+    public class Rectangle : IShape
     {
         public int SideX { get; set; }
         public int SideY { get; set; }
