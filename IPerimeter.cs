@@ -1,9 +1,7 @@
 ﻿namespace shapes
 {
-    public interface IShape
+    public interface IPerimeter
     {
-        int GetArea();
-
         int GetPerimeter();
     }
 }

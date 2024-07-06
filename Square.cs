@@ -1,6 +1,6 @@
 ﻿namespace shapes
 {
-    public class Square : IShape
+    public class Square : IArea, IPerimeter
     {
         public int Side { get; set; }
 

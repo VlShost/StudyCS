@@ -1,6 +1,6 @@
 ﻿namespace shapes
 {
-    public class Rectangle : IShape
+    public class Rectangle : IArea, IPerimeter
     {
         public int SideX { get; set; }
         public int SideY { get; set; }
