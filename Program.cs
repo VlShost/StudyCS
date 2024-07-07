@@ -10,9 +10,14 @@
             Console.WriteLine("*       SHAPES       *");
             Console.WriteLine("*--------------------*");
 
+            IInputProvider inputProvider = new ConsoleInputReader();
+            IOutputProvider outputProvider = new ConsoleInputWriter();
+
+            ShapeHandler shapeHandler = new ShapeHandler(inputProvider, outputProvider);
+
             while (!endApp)
             {
-                Console.WriteLine("Press Enter to start or Esc to exit");
+                Console.WriteLine("\nPress Enter to start or Esc to exit");
 
                 ConsoleKeyInfo inputKey = Console.ReadKey(true);
                 if (inputKey.Key == ConsoleKey.Enter)
@@ -20,7 +25,7 @@
                     Console.WriteLine("Enter the name of shape (rectangle or square):");
 
                     string input = Console.ReadLine();
-                    Console.WriteLine($"You entered {input}");
+                    shapeHandler.HandleShape(input);
                 }
                 else if (inputKey.Key == ConsoleKey.Escape)
                 {
