@@ -4,7 +4,7 @@ namespace shapes_hw.Classes.ConsoleInputOutput
 {
     public class ConsoleInputWriter : IOutputProvider
     {
-        public void WriteOutput(string output)
+        public void WriteLine(string output)
         {
             Console.WriteLine(output);
         }

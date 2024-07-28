@@ -2,11 +2,11 @@
 {
     public interface IInputProvider
     {
-        string ReadInput();
+        string ReadLine();
     }
 
     public interface IOutputProvider
     {
-        void WriteOutput(string output);
+        void WriteLine(string output);
     }
 }

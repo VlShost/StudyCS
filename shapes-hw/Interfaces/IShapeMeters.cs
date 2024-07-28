@@ -1,11 +1,11 @@
 ﻿namespace shapes_hw.Interfaces
 {
-    public interface IArea
+    public interface IShapeAreaMeter
     {
         int GetArea();
     }
 
-    public interface IPerimeter
+    public interface IShapePerimeterMeter
     {
         int GetPerimeter();
     }

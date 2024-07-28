@@ -2,7 +2,7 @@
 
 namespace shapes_hw.Classes.Shapes
 {
-    public class Rectangle : IArea, IPerimeter
+    public class Rectangle : IShapeAreaMeter, IShapePerimeterMeter
     {
         public int SideX { get; set; }
         public int SideY { get; set; }

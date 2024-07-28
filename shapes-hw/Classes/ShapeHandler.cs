@@ -16,8 +16,8 @@ namespace shapes_hw.Classes
 
         public void HandleShape(string shapeName)
         {
-            IArea area = null;
-            IPerimeter perimeter = null;
+            IShapeAreaMeter area = null;
+            IShapePerimeterMeter perimeter = null;
 
             bool validInput = false;
 

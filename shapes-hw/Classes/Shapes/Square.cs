@@ -2,7 +2,7 @@
 
 namespace shapes_hw.Classes.Shapes
 {
-    public class Square : IArea, IPerimeter
+    public class Square : IShapeAreaMeter, IShapePerimeterMeter
     {
         public int Side { get; set; }
 

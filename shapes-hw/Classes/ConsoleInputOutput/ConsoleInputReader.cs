@@ -4,9 +4,8 @@ namespace shapes_hw.Classes.ConsoleInputOutput
 {
     public class ConsoleInputReader : IInputProvider
     {
-        public string ReadInput()
+        public string ReadLine()
         {
             return Console.ReadLine();
         }
     }
-}
