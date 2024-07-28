@@ -1,4 +1,7 @@
-﻿namespace shapes
+﻿using shapes_hw.Classes.Shapes;
+using shapes_hw.Interfaces;
+
+namespace shapes_hw.Classes
 {
     public class ShapeHandler
     {

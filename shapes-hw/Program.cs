@@ -1,4 +1,8 @@
-﻿namespace shapes
+﻿using shapes_hw.Classes;
+using shapes_hw.Classes.ConsoleInputOutput;
+using shapes_hw.Interfaces;
+
+namespace shapes
 {
     internal class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace shapes
+﻿namespace shapes_hw.Interfaces
 {
     public interface IArea
     {

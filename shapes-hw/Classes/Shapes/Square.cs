@@ -1,4 +1,6 @@
-﻿namespace shapes
+﻿using shapes_hw.Interfaces;
+
+namespace shapes_hw.Classes.Shapes
 {
     public class Square : IArea, IPerimeter
     {
