@@ -2,6 +2,8 @@
 {
     public interface IInputProvider
     {
+        string ReadKey();
+
         string ReadLine();
     }
 
