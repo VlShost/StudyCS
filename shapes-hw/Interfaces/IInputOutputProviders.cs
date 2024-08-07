@@ -9,6 +9,8 @@
 
     public interface IOutputProvider
     {
-        void WriteLine(string output);
+        void WriteLine(string line);
+
+        void Write(string output);
     }
 }
