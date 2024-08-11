@@ -12,7 +12,7 @@ namespace calculator_hw.Classes
             OutputProvider = outputProvider;
         }
 
-        public static double DoCalc(double num1, double num2, Operators op)
+        public double DoCalc(double num1, double num2, Operators op)
         {
             double result = double.NaN;
             switch (op)
@@ -36,13 +36,13 @@ namespace calculator_hw.Classes
                     }
                     else
                     {
-                        OutputProvider.WriteLine("");
+                        OutputProvider.WriteLine("\nYou can't divide by 0.");
                         result = 0;
                     }
                     break;
 
                 default:
-                    Console.WriteLine("\nUnsupported operation.");
+                    OutputProvider.WriteLine("\nUnsupported operation.");
                     break;
             }
             return result;
