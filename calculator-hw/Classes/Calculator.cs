@@ -1,6 +1,8 @@
-﻿namespace Calculator
+﻿using calculator_hw.Enums;
+
+namespace calculator_hw.Classes
 {
-    internal class Calculator
+    public class Calculator
     {
         public static double DoCalc(double num1, double num2, Operators op)
         {

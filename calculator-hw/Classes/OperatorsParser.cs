@@ -1,6 +1,8 @@
-﻿namespace Calculator
+﻿using calculator_hw.Enums;
+
+namespace calculator_hw.Classes
 {
-    internal class OperatorsParser
+    public class OperatorsParser
     {
         public static Operators ParseOperator(char op)
         {

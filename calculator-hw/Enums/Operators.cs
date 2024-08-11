@@ -1,4 +1,4 @@
-﻿namespace Calculator
+﻿namespace calculator_hw.Enums
 {
     public enum Operators
     {

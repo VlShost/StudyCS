@@ -1,4 +1,7 @@
-﻿namespace Calculator
+﻿using calculator_hw.Classes;
+using calculator_hw.Enums;
+
+namespace Calculator
 {
     internal class Program
     {
