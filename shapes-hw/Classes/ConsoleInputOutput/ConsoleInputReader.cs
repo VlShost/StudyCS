@@ -14,3 +14,4 @@ namespace shapes_hw.Classes.ConsoleInputOutput
             throw new NotImplementedException();
         }
     }
+}
