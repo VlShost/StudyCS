@@ -1,7 +1,8 @@
 ﻿using calculator_hw.Classes;
-using calculator_hw.Enums;
+using calculator_hw.Classes.ConsoleInputOutput;
+using calculator_hw.Interfaces;
 
-namespace Calculator
+namespace calculator_hw
 {
     internal class Program
     {
@@ -13,7 +14,12 @@ namespace Calculator
             Console.WriteLine("* Console Calculator *");
             Console.WriteLine("*--------------------*");
 
-            char i = Char.MinValue;
+            IInputProvider inputProvider = new ConsoleInputReader();
+            IOutputProvider outputProvider = new ConsoleInputWriter();
+
+            var calculator = new Calculator(outputProvider);
+
+            char inputKey = Char.MinValue;
             string input = "";
 
             while (!endApp)
@@ -22,24 +28,24 @@ namespace Calculator
 
                 do
                 {
-                    i = Console.ReadKey().KeyChar;
+                    inputKey = Console.ReadKey().KeyChar;
 
-                    if (i == '=')
+                    if (inputKey == '=')
                     {
                         break;
                     }
-                    else if (i == 'q')
+                    else if (inputKey == 'q')
                     {
                         endApp = true;
                         break;
                     }
 
-                    input += i;
+                    input += inputKey;
                 } while (true);
 
-                if (i == '=')
+                if (inputKey == '=')
                 {
-                    ProcessOperation(input);
+                    //InputReader.Read(input);
                     input = "";
                 }
                 else if (endApp)
@@ -48,44 +54,6 @@ namespace Calculator
                 }
 
                 Console.WriteLine("\nPress \"Enter\" to start new operation or press \"q\" to close the app:");
-            }
-        }
-
-        private static void ProcessOperation(string input)
-        {
-            var isValidOperator = false;
-
-            foreach (char symbol in input)
-            {
-                try
-                {
-                    Operators op = OperatorsParser.ParseOperator(symbol);
-                    int opIndex = input.IndexOf(symbol);
-
-                    if (opIndex != -1)
-                    {
-                        if (double.TryParse(input.Substring(0, opIndex), out double num1) &&
-                        double.TryParse(input.Substring(opIndex + 1), out double num2))
-                        {
-                            double result = Calculator.DoCalc(num1, num2, op);
-                            Console.Write(result);
-                        }
-                        else
-                        {
-                            Console.WriteLine("\nInvalid numbers format or words in input.");
-                        }
-                    }
-
-                    isValidOperator = true;
-                    break;
-                }
-                catch (ArgumentException)
-                {
-                }
-            }
-            if (!isValidOperator)
-            {
-                Console.WriteLine("\nNo valid operator found (\"+\", \"-\", \"*\", \"/\").");
             }
         }
     }

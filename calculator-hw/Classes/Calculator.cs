@@ -1,9 +1,17 @@
 ﻿using calculator_hw.Enums;
+using calculator_hw.Interfaces;
 
 namespace calculator_hw.Classes
 {
     public class Calculator
     {
+        public IOutputProvider OutputProvider { get; set; }
+
+        public Calculator(IOutputProvider outputProvider)
+        {
+            OutputProvider = outputProvider;
+        }
+
         public static double DoCalc(double num1, double num2, Operators op)
         {
             double result = double.NaN;
@@ -28,7 +36,7 @@ namespace calculator_hw.Classes
                     }
                     else
                     {
-                        Console.WriteLine("\nYou can't divide by 0.");
+                        OutputProvider.WriteLine("");
                         result = 0;
                     }
                     break;
