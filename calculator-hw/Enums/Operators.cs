@@ -5,6 +5,8 @@
         Add = '+',
         Subtract = '-',
         Multiply = '*',
-        Divide = '/'
+        Divide = '/',
+        LeftParenthesis = '(',
+        RightParenthesis = ')'
     }
 }
