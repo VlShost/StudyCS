@@ -68,7 +68,7 @@ namespace calculator_hw.Classes
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(number) && !(hasDot && number.EndsWith(".")))
+                    if (!string.IsNullOrEmpty(number) && !(hasDot && number.EndsWith('.')))
                     {
                         tokens.Add(number);
                         Console.WriteLine($"adding number: {number}");
