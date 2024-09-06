@@ -1,5 +1,5 @@
 ﻿using calculator_hw.Enums;
-using calculator_hw.Interfaces;
+using calculator_hw.Interfaces.IOProviders;
 
 namespace calculator_hw.Classes
 {
@@ -12,7 +12,7 @@ namespace calculator_hw.Classes
             OutputProvider = outputProvider;
         }
 
-        public double DoCalc(double num1, double num2, Operators op)
+        public double DoCalculation(double num1, double num2, Operators op)
         {
             double result = double.NaN;
             switch (op)
@@ -39,6 +39,10 @@ namespace calculator_hw.Classes
                         OutputProvider.WriteLine("\nYou can't divide by 0.");
                         result = 0;
                     }
+                    break;
+
+                case Operators.Power:
+                    result = Math.Pow(num1, num2);
                     break;
 
                 default:
