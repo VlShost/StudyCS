@@ -9,13 +9,14 @@ namespace calculator_hw.Classes
             var tokens = new List<string>();
             string number = "";
             bool isPreviousCharOperator = true;
+            bool hasDot = false;
             int minusCount = 0;
 
             foreach (char c in input)
             {
                 Console.WriteLine($"processing: {c}");
 
-                if (char.IsDigit(c) || (c == '.' || c == ','))
+                if (char.IsDigit(c))
                 {
                     if (minusCount > 0)
                     {
@@ -29,6 +30,19 @@ namespace calculator_hw.Classes
 
                     number += c;
                     isPreviousCharOperator = false;
+                }
+                else if (c == '.' || c == ',')
+                {
+                    if (!hasDot && number.Length > 0)
+                    {
+                        number += '.';
+                        hasDot = true;
+                        isPreviousCharOperator = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("ignoring extra or invalid decimal point/comma");
+                    }
                 }
                 else if (c == '-')
                 {
@@ -44,6 +58,7 @@ namespace calculator_hw.Classes
                             tokens.Add(number);
                             Console.WriteLine($"adding number: {number}");
                             number = "";
+                            hasDot = false;
                         }
 
                         tokens.Add(c.ToString());
@@ -53,11 +68,12 @@ namespace calculator_hw.Classes
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(number))
+                    if (!string.IsNullOrEmpty(number) && !(hasDot && number.EndsWith(".")))
                     {
                         tokens.Add(number);
                         Console.WriteLine($"adding number: {number}");
                         number = "";
+                        hasDot = false;
                     }
 
                     if (Enum.IsDefined(typeof(Operators), (int)c))
