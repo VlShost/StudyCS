@@ -1,24 +1,9 @@
-﻿using shapes_hw.Interfaces;
-
-namespace shapes_hw.Classes.Shapes
+﻿namespace shapes_hw.Classes.Shapes
 {
-    public class Square : IShapeAreaMeter, IShapePerimeterMeter
+    public class Square : Rectangle
     {
-        public int Side { get; set; }
-
-        public Square(int side)
+        public Square(int side) : base(side, side)
         {
-            Side = side;
-        }
-
-        public int GetArea()
-        {
-            return Side * Side;
-        }
-
-        public int GetPerimeter()
-        {
-            return 4 * Side;
         }
     }
 }

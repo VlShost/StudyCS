@@ -8,4 +8,10 @@ namespace shapes_hw.Classes.ConsoleInputOutput
         {
             return Console.ReadLine();
         }
+
+        public string ReadKey()
+        {
+            throw new NotImplementedException();
+        }
     }
+}
