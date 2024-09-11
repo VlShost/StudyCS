@@ -1,6 +1,6 @@
 ﻿using calculator_hw.Interfaces;
 
-namespace calculator_hw.Classes.Operations
+namespace calculator_hw.Classes.Operations.Advanced
 {
     public class PowerOperation : IOperation
     {
