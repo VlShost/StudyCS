@@ -1,12 +1,19 @@
-﻿namespace calculator_hw.Classes
+﻿using calculator_hw.Enums;
+
+namespace calculator_hw.Classes
 {
     public class OperationPriorityProcessor
     {
-        private List<string> tokens;
+        private List<string> _tokens;
 
         public OperationPriorityProcessor(List<string> inputTokens)
         {
-            tokens = inputTokens;
+            _tokens = inputTokens;
+        }
+
+        public static double ProcessTokens()
+        {
+            throw new NotImplementedException();
         }
     }
 }
