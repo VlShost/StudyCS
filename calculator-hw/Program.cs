@@ -23,6 +23,11 @@ namespace calculator_hw
                     userInterface.Start();
                 }
             }
+            else
+            {
+                var userInerface = new BasicUI();
+                userInerface.Start();
+            }
         }
     }
 }
