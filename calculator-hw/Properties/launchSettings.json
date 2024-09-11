@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "calculator-hw": {
+      "commandName": "Project",
+      "commandLineArgs": "-version basic"
+    }
+  }
+}
