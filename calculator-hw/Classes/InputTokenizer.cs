@@ -4,97 +4,128 @@ namespace calculator_hw.Classes
 {
     public class InputTokenizer
     {
-        public static List<string> Tokenize(string input)
-        {
-            var tokens = new List<string>();
-            string number = "";
-            bool isPreviousCharOperator = true;
-            bool hasDot = false;
-            int minusCount = 0;
+        private readonly List<string> _tokens;
+        private string _number;
+        private bool _isPreviousCharOperator = true;
+        private bool _hasDot = false;
+        private int _minusCount = 0;
 
+        public InputTokenizer()
+        {
+            _tokens = new List<string>();
+            _number = "";
+            _isPreviousCharOperator = true;
+            _hasDot = false;
+            _minusCount = 0;
+        }
+
+        public List<string> Tokenize(string input)
+        {
             foreach (char c in input)
             {
-                Console.WriteLine($"processing: {c}");
-
-                if (char.IsDigit(c))
-                {
-                    if (minusCount > 0)
-                    {
-                        if (isPreviousCharOperator)
-                        {
-                            number += '-';
-                            Console.WriteLine("adding minus sign to number");
-                        }
-                        minusCount = 0;
-                    }
-
-                    number += c;
-                    isPreviousCharOperator = false;
-                }
-                else if (c == '.' || c == ',')
-                {
-                    if (!hasDot && number.Length > 0)
-                    {
-                        number += '.';
-                        hasDot = true;
-                        isPreviousCharOperator = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("ignoring extra or invalid decimal point/comma");
-                    }
-                }
-                else if (c == '-')
-                {
-                    if (isPreviousCharOperator)
-                    {
-                        minusCount++;
-                        Console.WriteLine($"minus count is : {minusCount}");
-                    }
-                    else
-                    {
-                        if (!string.IsNullOrEmpty(number))
-                        {
-                            tokens.Add(number);
-                            Console.WriteLine($"adding number: {number}");
-                            number = "";
-                            hasDot = false;
-                        }
-
-                        tokens.Add(c.ToString());
-                        Console.WriteLine($"adding operator: {c}");
-                        isPreviousCharOperator = true;
-                    }
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(number) && !(hasDot && number.EndsWith('.')))
-                    {
-                        tokens.Add(number);
-                        Console.WriteLine($"adding number: {number}");
-                        number = "";
-                        hasDot = false;
-                    }
-
-                    if (Enum.IsDefined(typeof(Operators), (int)c))
-                    {
-                        if (!isPreviousCharOperator)
-                        {
-                            tokens.Add(c.ToString());
-                            Console.WriteLine($"adding operator/parens: {c}");
-                        }
-                        minusCount = 0;
-                        isPreviousCharOperator = true;
-                    }
-                }
+                ProcessCharacter(c);
             }
-            if (!string.IsNullOrEmpty(number))
+
+            if (!string.IsNullOrEmpty(_number))
             {
-                tokens.Add(number);
-                Console.WriteLine($"adding last number: {number}");
+                _tokens.Add(_number);
             }
 
-            return tokens;
+            return _tokens;
+        }
+
+        public void ClearTokens()
+        {
+            _tokens.Clear();
+        }
+
+        private void ProcessCharacter(char c)
+        {
+            if (char.IsDigit(c))
+            {
+                HandleDigit(c);
+            }
+            else if (c == '.' || c == ',')
+            {
+                HandleDecimal();
+            }
+            else if (c == '-')
+            {
+                HandleMinus(c);
+            }
+            else
+            {
+                AddNumberToTokens();
+                HandleOperator(c);
+            }
+        }
+
+        private void HandleDigit(char c)
+        {
+            if (_minusCount > 0)
+            {
+                if (_isPreviousCharOperator)
+                {
+                    _number += '-';
+                }
+                _minusCount = 0;
+            }
+
+            _number += c;
+            _isPreviousCharOperator = false;
+        }
+
+        private void HandleDecimal()
+        {
+            if (!_hasDot && _number.Length > 0)
+            {
+                _number += '.';
+                _hasDot = true;
+                _isPreviousCharOperator = false;
+            }
+        }
+
+        private void HandleMinus(char c)
+        {
+            if (_isPreviousCharOperator)
+            {
+                _minusCount++;
+            }
+            else
+            {
+                AddNumberToTokens();
+
+                _tokens.Add(c.ToString());
+                _isPreviousCharOperator = true;
+            }
+        }
+
+        private void AddNumberToTokens()
+        {
+            if (!string.IsNullOrEmpty(_number) && !(_hasDot && _number.EndsWith('.')))
+            {
+                _tokens.Add(_number);
+                _number = "";
+                _hasDot = false;
+            }
+        }
+
+        private bool IsOperator(char c)
+        {
+            return Enum.IsDefined(typeof(Operators), (int)c);
+        }
+
+        private void HandleOperator(char c)
+        {
+            if (IsOperator(c))
+            {
+                if (!_isPreviousCharOperator)
+                {
+                    _tokens.Add(c.ToString());
+                }
+                _minusCount = 0;
+                _isPreviousCharOperator = true;
+            }
         }
     }
 }
