@@ -8,7 +8,7 @@ namespace calculator_hw.Classes.Operations.Basic
         {
             if (rightOperand == 0)
             {
-                return double.NaN;
+                return double.NaN;      // ?
             }
             return leftOperand / rightOperand;
         }
