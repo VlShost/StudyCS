@@ -1,12 +1,21 @@
-﻿using calculator_hw.Classes.Operations.Basic;
+﻿using calculator_hw.Classes.Operations.Advanced;
+using calculator_hw.Classes.Operations.Basic;
 using calculator_hw.Enums;
 using calculator_hw.Interfaces;
+using calculator_hw.Interfaces.IOProviders;
 
 namespace calculator_hw.Classes
 {
     public class OperationsFactory
     {
-        public static IOperation CreateBasicOperation(Operators operators)
+        private IOutputProvider OutputProvider { get; }
+
+        public OperationsFactory(IOutputProvider outputProvider)
+        {
+            OutputProvider = outputProvider;
+        }
+
+        public IOperation CreateOperation(Operators operators, CalculatorVersions version)
         {
             switch (operators)
             {
@@ -22,9 +31,19 @@ namespace calculator_hw.Classes
                 case Operators.Divide:
                     return new DivisionOperation();
 
+                case Operators.Power:
+                    if (version == CalculatorVersions.Advanced)
+                    {
+                        return new PowerOperation();
+                    }
+                    break;
+
                 default:
-                    throw new NotImplementedException($"{operators} currently not supported");
+                    OutputProvider.WriteLine($"\n{operators} currently not supported");
+                    return null;
             }
+            OutputProvider.WriteLine($"\nOperation {operators} is not supported in this version");
+            return null;
         }
     }
 }
