@@ -1,4 +1,5 @@
-﻿using calculator_hw.UI;
+﻿using calculator_hw.Classes;
+using calculator_hw.Enums;
 
 namespace calculator_hw
 {
@@ -6,28 +7,19 @@ namespace calculator_hw
     {
         private static void Main(string[] args)
         {
-            if (args.Length > 0)
+            CalculatorVersions version = CalculatorVersions.Basic;
+
+            if (args.Length > 0 && args[0] == "-version")
             {
-                if (args[0] == "-version" && args[1] == "basic")
+                if (Enum.TryParse(args[1], true, out CalculatorVersions requestedVersion))
                 {
-                    var userInterface = new BasicUI();
-                    userInterface.Start();
-                }
-                else if (args[0] == "-version" && args[1] == "advanced")
-                {
-                    //var userInterface = new AdvancedUI();
-                }
-                else if (args[0] == "-version" && args[1] == "debug")
-                {
-                    var userInterface = new DebugUI();
-                    userInterface.Start();
+                    version = requestedVersion;
                 }
             }
-            else
-            {
-                var userInerface = new BasicUI();
-                userInerface.Start();
-            }
+
+            var uiFactory = new UserInterfaceFactory();
+            var userInerface = uiFactory.CreateUserInterface(version);
+            userInerface.Start();
         }
     }
 }
