@@ -9,6 +9,12 @@ namespace calculator_hw.UI
     public class BasicUI : IUserInterfaceStart, IUserInterfaceStop
     {
         private bool _endApp = true;
+        private CalculatorVersions _version;
+
+        public BasicUI(CalculatorVersions version)
+        {
+            _version = version;
+        }
 
         public void Start()
         {
@@ -16,10 +22,6 @@ namespace calculator_hw.UI
 
             IInputProvider inputProvider = new ConsoleInputReader();
             IOutputProvider outputProvider = new ConsoleInputWriter();
-
-            var tokenizer = new InputTokenizer();
-            //var processedTokens = new OperationPriorityProcessor();
-            var calculator = new Calculator();
 
             HelloMessage();
 
@@ -68,19 +70,19 @@ namespace calculator_hw.UI
 
                         if (inputKey == '=')
                         {
+                            var tokenizer = new InputTokenizer();
+                            tokenizer.ClearTokens();
+
                             var tokens = tokenizer.Tokenize(input);
 
-                            Console.WriteLine($"\nTokens: {tokens.Count()}");
-                            foreach (string token in tokens)
-                            {
-                                Console.WriteLine(token);
-                            }
+                            var processedTokens = new OperationPriorityProcessor(outputProvider, _version);
+                            var result = processedTokens.ProcessTokens(tokens);
+
                             tokenizer.ClearTokens();
                             input = "";
 
-                            //var result = Calculator.DoCalculation(processedTokens);
-
-                            //Console.Write(result);
+                            Console.Write(result);
+                            Console.WriteLine();
                         }
                     };
                 }
@@ -96,17 +98,11 @@ namespace calculator_hw.UI
             _endApp = true;
         }
 
-        private void HelloMessage()
+        protected virtual void HelloMessage()
         {
-            Console.WriteLine("*--------------------------*");
-            Console.WriteLine("* Basic Console Calculator *");
-            Console.WriteLine("*--------------------------*");
-
-            Console.WriteLine("\nSupported Operations:");
-            Console.WriteLine("  +  Addition          Example: 2 + 2 =");
-            Console.WriteLine("  -  Subtraction       Example: 5 - 3 =");
-            Console.WriteLine("  *  Multiplication    Example: 4 * 7 =");
-            Console.WriteLine("  /  Division          Example: 10 / 2 =");
+            Console.WriteLine("*--------------------*");
+            Console.WriteLine("* Console Calculator *");
+            Console.WriteLine("*--------------------*");
 
             Console.WriteLine("\nHow to Use:");
             Console.WriteLine("  - Enter Numbers and Operators. Multiple operations allowed. Example: 2 + 2 + 2");
@@ -114,6 +110,12 @@ namespace calculator_hw.UI
             Console.WriteLine("  - Complete the Operation: Press = to calculate the result. Example: 2 + 2 = 4");
             Console.WriteLine("  - Delete Last Character: Press Backspace to remove the last input.");
             Console.WriteLine("  - Exit the Program: Press Esc at any time to close the app.");
+
+            Console.WriteLine("\nSupported Operations:");
+            Console.WriteLine("  +  Addition          Example: 2 + 2 =");
+            Console.WriteLine("  -  Subtraction       Example: 5 - 3 =");
+            Console.WriteLine("  *  Multiplication    Example: 4 * 7 =");
+            Console.WriteLine("  /  Division          Example: 10 / 2 =");
         }
     }
 }
