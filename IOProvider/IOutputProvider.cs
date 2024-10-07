@@ -1,4 +1,4 @@
-﻿namespace calculator_hw.Interfaces.IOProviders
+﻿namespace IOProvider
 {
     public interface IOutputProvider
     {

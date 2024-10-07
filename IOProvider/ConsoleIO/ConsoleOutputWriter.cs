@@ -1,6 +1,4 @@
-﻿using shapes_hw.Interfaces;
-
-namespace shapes_hw.Classes.ConsoleInputOutput
+﻿namespace IOProvider.ConsoleIO
 {
     public class ConsoleInputWriter : IOutputProvider
     {
@@ -11,7 +9,7 @@ namespace shapes_hw.Classes.ConsoleInputOutput
 
         public void Write(string output)
         {
-            throw new NotImplementedException();
+            Console.Write(output);
         }
     }
 }
