@@ -1,6 +1,6 @@
 ﻿namespace IOProvider.ConsoleIO
 {
-    public class ConsoleInputWriter : IOutputProvider
+    public class ConsoleOutputWriter : IOutputProvider
     {
         public void WriteLine(string line)
         {

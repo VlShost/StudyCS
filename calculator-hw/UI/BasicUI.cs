@@ -1,7 +1,7 @@
-﻿using calculator_hw.Classes.ConsoleInputOutput;
+﻿using IOProvider;
+using IOProvider.ConsoleIO;
 using calculator_hw.Classes;
 using calculator_hw.Enums;
-using calculator_hw.Interfaces.IOProviders;
 using calculator_hw.Interfaces.UI;
 
 namespace calculator_hw.UI
@@ -21,25 +21,25 @@ namespace calculator_hw.UI
             _endApp = false;
 
             IInputProvider inputProvider = new ConsoleInputReader();
-            IOutputProvider outputProvider = new ConsoleInputWriter();
+            IOutputProvider outputProvider = new ConsoleOutputWriter();
 
             HelloMessage();
 
             while (!_endApp)
             {
-                Console.Write("\nPress Enter to start or Esc to exit");
+                outputProvider.Write("\nPress Enter to start or Esc to exit");
 
-                ConsoleKeyInfo selection = Console.ReadKey(true);
+                var selection = inputProvider.ReadKey(true);
 
                 if (selection.Key == ConsoleKey.Enter)
                 {
-                    Console.Write("\nType a desired operation: ");
+                    outputProvider.Write("\nType a desired operation: ");
 
                     string input = "";
 
                     while (true)
                     {
-                        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                        ConsoleKeyInfo keyInfo = inputProvider.ReadKey(true);
 
                         if (keyInfo.Key == ConsoleKey.Escape)
                         {
@@ -55,7 +55,7 @@ namespace calculator_hw.UI
                             inputKey == '=' ||
                             inputKey == ' ')
                         {
-                            Console.Write(inputKey);
+                            outputProvider.Write($"{inputKey}");
                             input += inputKey;
                         }
 
@@ -64,7 +64,7 @@ namespace calculator_hw.UI
                             if (input.Length > 0)
                             {
                                 input = input.Remove(input.Length - 1);
-                                Console.Write("\b \b");
+                                outputProvider.Write("\b \b");
                             }
                         }
 
@@ -81,8 +81,7 @@ namespace calculator_hw.UI
                             tokenizer.ClearTokens();
                             input = "";
 
-                            Console.Write(result);
-                            Console.WriteLine();
+                            outputProvider.Write($"{result}\n");
                         }
                     };
                 }
