@@ -1,6 +1,6 @@
-﻿using shapes_hw.Classes;
-using shapes_hw.Classes.ConsoleInputOutput;
-using shapes_hw.Interfaces;
+﻿using IOProvider;
+using IOProvider.ConsoleIO;
+using shapes_hw.Classes;
 
 namespace shapes
 {
@@ -15,7 +15,7 @@ namespace shapes
             Console.WriteLine("*--------------------*");
 
             IInputProvider inputProvider = new ConsoleInputReader();
-            IOutputProvider outputProvider = new ConsoleInputWriter();
+            IOutputProvider outputProvider = new ConsoleOutputWriter();
 
             ShapeHandler shapeHandler = new ShapeHandler(inputProvider, outputProvider);
 
