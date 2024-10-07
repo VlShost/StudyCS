@@ -1,4 +1,7 @@
-﻿namespace shapes
+﻿using shapes_hw.Classes.Shapes;
+using shapes_hw.Interfaces;
+
+namespace shapes_hw.Classes
 {
     public class ShapeHandler
     {
@@ -13,8 +16,8 @@
 
         public void HandleShape(string shapeName)
         {
-            IArea area = null;
-            IPerimeter perimeter = null;
+            IShapeAreaMeter area = null;
+            IShapePerimeterMeter perimeter = null;
 
             bool validInput = false;
 
@@ -25,15 +28,15 @@
 
                     do
                     {
-                        OutputProvider.WriteOutput("Enter WIDTH of rectangle:");
+                        OutputProvider.WriteLine("Enter WIDTH of rectangle:");
 
-                        if (!int.TryParse(InputProvider.ReadInput(), out width))
+                        if (!int.TryParse(InputProvider.ReadLine(), out width))
                         {
-                            OutputProvider.WriteOutput("Invalid input. Please enter a valid integer.");
+                            OutputProvider.WriteLine("Invalid input. Please enter a valid integer.");
                         }
                         else if (width <= 0)
                         {
-                            OutputProvider.WriteOutput("Invalid input. Please enter a positive integer.");
+                            OutputProvider.WriteLine("Invalid input. Please enter a positive integer.");
                         }
                         else
                         {
@@ -45,15 +48,15 @@
 
                     do
                     {
-                        OutputProvider.WriteOutput("Enter HEIGHT of rectangle:");
+                        OutputProvider.WriteLine("Enter HEIGHT of rectangle:");
 
-                        if (!int.TryParse(InputProvider.ReadInput(), out height))
+                        if (!int.TryParse(InputProvider.ReadLine(), out height))
                         {
-                            OutputProvider.WriteOutput("Invalid input. Please enter an integer.");
+                            OutputProvider.WriteLine("Invalid input. Please enter an integer.");
                         }
                         else if (height <= 0)
                         {
-                            OutputProvider.WriteOutput("Invalid input. Height must be a positive integer.");
+                            OutputProvider.WriteLine("Invalid input. Height must be a positive integer.");
                         }
                         else
                         {
@@ -72,14 +75,14 @@
 
                     do
                     {
-                        OutputProvider.WriteOutput("Enter side length of square:");
-                        if (!int.TryParse(InputProvider.ReadInput(), out side))
+                        OutputProvider.WriteLine("Enter side length of square:");
+                        if (!int.TryParse(InputProvider.ReadLine(), out side))
                         {
-                            OutputProvider.WriteOutput("Invalid input. Please enter an integer.");
+                            OutputProvider.WriteLine("Invalid input. Please enter an integer.");
                         }
                         else if (side <= 0)
                         {
-                            OutputProvider.WriteOutput("Invalid input. Side must be a positive integer.");
+                            OutputProvider.WriteLine("Invalid input. Side must be a positive integer.");
                         }
                         else
                         {
@@ -94,13 +97,13 @@
                     break;
 
                 default:
-                    OutputProvider.WriteOutput("Invalid shape name");
+                    OutputProvider.WriteLine("Invalid shape name");
                     return;
             }
 
             if (area != null && perimeter != null)
             {
-                OutputProvider.WriteOutput($"\n{shapeName}: area is {area.GetArea()} and perimeter is {perimeter.GetPerimeter()}");
+                OutputProvider.WriteLine($"\n{shapeName}: area is {area.GetArea()} and perimeter is {perimeter.GetPerimeter()}");
             }
         }
     }
